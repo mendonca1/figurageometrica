@@ -1,0 +1,37 @@
+# Makefile
+# Definindo o compilador
+CXX = g++
+CXXFLAGS = -Wall -g
+
+# Alvo principal
+all: main
+
+# Alvo para compilar o programa principal
+main: main.o sculptor.o putvoxel.o putbox.o putsphere.o putellipsoid.o
+	$(CXX) $(CXXFLAGS) -o main main.o sculptor.o putvoxel.o putbox.o putsphere.o putellipsoid.o
+
+# Regras para compilar os arquivos objeto
+main.o: main.cpp sculptor.hpp figura_geometrica.hpp putvoxel.hpp putbox.hpp putsphere.hpp putellipsoid.hpp
+	$(CXX) $(CXXFLAGS) -c main.cpp
+
+sculptor.o: sculptor.cpp sculptor.hpp voxel.hpp
+	$(CXX) $(CXXFLAGS) -c sculptor.cpp
+
+putvoxel.o: putvoxel.cpp putvoxel.hpp figura_geometrica.hpp
+	$(CXX) $(CXXFLAGS) -c putvoxel.cpp
+
+putbox.o: putbox.cpp putbox.hpp figura_geometrica.hpp
+	$(CXX) $(CXXFLAGS) -c putbox.cpp
+
+putsphere.o: putsphere.cpp putsphere.hpp figura_geometrica.hpp
+	$(CXX) $(CXXFLAGS) -c putsphere.cpp
+
+putellipsoid.o: putellipsoid.cpp putellipsoid.hpp figura_geometrica.hpp
+	$(CXX) $(CXXFLAGS) -c putellipsoid.cpp
+
+# Limpeza dos arquivos objeto e executáveis
+clean:
+	rm -f *.o main
+
+
+
